@@ -12,7 +12,7 @@ def clear_globals():
     highest_prime_factor = 0
 
 
-def find_largest_prime_factor_v2(n):
+def find_largest_prime_factor(n):
     global highest_prime_factor
 
     prime, divisor = is_prime(n)
@@ -20,20 +20,23 @@ def find_largest_prime_factor_v2(n):
     if prime:
         return divisor
     else:
-        find_largest_prime_factor_v2(n // divisor)
+        find_largest_prime_factor(n // divisor)
 
 
-def is_prime(n):
-    for i in range(2, int(math.sqrt(n)) + 1):
-        if n % i == 0:
+def is_prime(num):
+    if num < 2:
+        return False, num
+    
+    for i in range(2, int(math.sqrt(num)) + 1):
+        if num % i == 0:
             return False, i
 
-    return True, n
+    return True, num
 
 
 t = int(input().strip())
 for a0 in range(t):
     n = int(input().strip())
-    find_largest_prime_factor_v2(n)
+    find_largest_prime_factor(n)
     print(highest_prime_factor)
     clear_globals()
